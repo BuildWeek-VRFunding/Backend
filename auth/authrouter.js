@@ -25,9 +25,19 @@ router.get('/user/:id', (req, res) => {
         })
 })
 //GET DONATIONS BY ID
-router.get('/donations/:id', (req, res) => {
+router.get('/donationtotal/:id', (req, res) => {
     const id = req.params.id;
-    Users.findById(id)
+    fund.getDonationTotalByID(id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.status(404).json({message: 'could not find fundraiser', err})
+        })
+})
+router.get('/donatedtotal/:id', (req, res) => {
+    const id = req.params.id;
+    fund.findDonationByID(id)
         .then(data => {
             res.json(data)
         })
