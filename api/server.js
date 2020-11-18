@@ -7,7 +7,7 @@ const authrouter = require("../auth/authrouter.js");
 const bcrypt = require('bcryptjs');
 const restricted = require('./restricted-middleware')
 
-const users = require('../database/users-model')
+const Users = require('../database/users-model')
 const server = express();
 
 server.use(helmet());
