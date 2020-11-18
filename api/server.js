@@ -49,6 +49,6 @@ function makeToken(user){
     const options = {
         expiresIn: '5 days'
     }
-    return jwt.sign(payload, process.env.secret, options);
+    return jwt.sign(payload, process.env.SECRET, options);
 }
 module.exports = server;
