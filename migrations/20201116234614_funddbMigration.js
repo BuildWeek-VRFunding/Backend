@@ -4,7 +4,6 @@ exports.up = function(knex) {
       tbl.increments("id");
       tbl.string("username", 255).notNullable().unique();
       tbl.string("name",255);
-      tbl.string("description", 255)
       tbl.string("password", 255).notNullable();
       tbl.boolean("fundraiser").defaultTo(false)
 
@@ -14,16 +13,9 @@ exports.up = function(knex) {
       tbl.string("name").notNullable().unique();
       tbl.string("description").notNullable();
   })
-  .createTable("events", tbl => {
-      tbl.increments("id");
-      tbl.integer("fundraiserid").unsigned().notNullable().references("fundraiser.id").onDelete("CASCADE").onUpdate("CASCADE");
-      tbl.string("name");
-      tbl.string("description");
-  })
   .createTable("donation", tbl => {
       tbl.increments("id");
       tbl.integer("donorid").unsigned().notNullable().references("users.id").onDelete("CASCADE").onUpdate("CASCADE");
-      tbl.integer("eventid").unsigned().notNullable().references("events.id").onDelete("CASCADE").onUpdate("CASCADE");
       tbl.integer("amount").unsigned().notNullable();
       tbl.string("note");
   })

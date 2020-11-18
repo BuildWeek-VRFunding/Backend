@@ -4,7 +4,10 @@ module.exports = {
     add,
     find,
     findBy,
-    findById
+    findById,
+    findByUsername,
+    // update,
+    // remove
 }
 function find() {
     return db("users").select("id", "username").orderBy("id");
@@ -21,7 +24,9 @@ async function add(user) {
         throw error;
     }
 }
-
+function findByUsername(username){
+    return db('users').where({ username }).first();
+}
 function findById(id){
     return db("users").where({ id }).first();
 }
