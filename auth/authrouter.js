@@ -4,7 +4,7 @@ const Users = require("../database/users-model")
 const fund = require('../database/auth-model')
 //GET FUNDRAISER BY ID
 router.get('/fundraiser/:id', (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     fund.findById(id)
         .then(data => {
             res.json(data)
@@ -15,7 +15,7 @@ router.get('/fundraiser/:id', (req, res) => {
 })
 //GET USER BY ID
 router.get('/user/:id', (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     Users.findById(id)
         .then(data => {
             res.json(data)
@@ -26,7 +26,7 @@ router.get('/user/:id', (req, res) => {
 })
 //GET DONATIONS BY ID
 router.get('/donations/:id', (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     Users.findById(id)
         .then(data => {
             res.json(data)
