@@ -16,6 +16,7 @@ exports.up = function(knex) {
   .createTable("donation", tbl => {
       tbl.increments("id");
       tbl.integer("donorid").unsigned().notNullable().references("users.id").onDelete("CASCADE").onUpdate("CASCADE");
+      tbl.integer("funderid").unsigned().notNullable().references("fundraiser.id").onDelete("CASCADE").onUpdate("CASCADE");
       tbl.integer("amount").unsigned().notNullable();
       tbl.string("note");
   })

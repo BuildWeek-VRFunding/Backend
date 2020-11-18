@@ -1,17 +1,38 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const Users = require("../database/dbmodel")
 
-router.post('/register', async (req, res) => {
-    try{
-      const {username, password, name, description,fundraiser } = req.body
-      const hash =bcrypt.hashSync(password,10)
-      const user = {username, password:hash, name, description, fundraiser}
-      const addedUser = await Users.add(user)
-      res.json(addedUser)
-    }
-    catch(err){
-      res.status(500).json({ message:err.message})
-    }
-  });
-  module.exports = router;
+const Users = require("../database/users-model")
+const fund = require('../database/auth-model')
+//GET FUNDRAISER BY ID
+router.get('/fundraiser/:id', (req, res) => {
+    const id = req.params;
+    fund.findById(id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.status(404).json({message: 'could not find fundraiser', err})
+        })
+})
+//GET USER BY ID
+router.get('/user/:id', (req, res) => {
+    const id = req.params;
+    Users.findById(id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.status(404).json({message: 'could not find fundraiser', err})
+        })
+})
+//GET DONATIONS BY ID
+router.get('/donations/:id', (req, res) => {
+    const id = req.params;
+    Users.findById(id)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.status(404).json({message: 'could not find fundraiser', err})
+        })
+})
+module.exports = router;

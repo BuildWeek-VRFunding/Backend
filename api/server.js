@@ -5,8 +5,9 @@ const helmet = require("helmet");
 const cors = require("cors");
 const authrouter = require("../auth/authrouter.js");
 const bcrypt = require('bcryptjs');
+const restricted = require('./restricted-middleware')
 
-const users = require('../database/dbmodel')
+const users = require('../database/users-model')
 const server = express();
 
 server.use(helmet());
@@ -29,7 +30,7 @@ server.post('/register', async (req, res) => {
       const [user] = await Users.findBy({username:req.body.username})
       if( user && bcrypt.compareSync(req.body.password, user.password)){
         const token = makeToken(user);
-        res.json({ message: `welcome back ${user.username}`, token})
+        res.json({ message: `welcome back ${user.username}`, token, user})
       } else {
         res.status(401).json({message:'bad credentials'})
       }
@@ -38,6 +39,7 @@ server.post('/register', async (req, res) => {
     }
   });
 
+  server.use('/auth', restricted, authrouter);
 
 function makeToken(user){
     const payload = {
