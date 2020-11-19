@@ -46,7 +46,7 @@ router.put('/fundraiseredit/:id', (req, res)=> {
 })
 
 //DELETE FUNDRAISER BY ID
-router.delete('./fundraiserdel/:id', (req,res) => {
+router.delete('/fundraiserdel/:id', (req,res) => {
     const id = req.params.id;
     fund.remove(id)
     .then(data =>{
