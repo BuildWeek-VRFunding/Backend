@@ -25,18 +25,19 @@ function addfund(data) {
            })
         }
 function update(id, changes) {
-    return db('fundraiser').where(id).update(changes)
+    return db('fundraiser').where('ownerid','=',id).update(changes)
        .then(data => {
           return data
        })
  }
  
  function remove(id) {
-    return db('fundraiser').where( id ).del()
+    return db('fundraiser').where( 'ownerid','=', id ).delete()
  }
 function getfundraiser(id){
-    return db("fundraiser as f").join("donations as d", "d.funderid", "f.ownerid")
-            .where("f.ownerid", "=", id)
+    return db('donation')
+    .join('fundraiser', 'fundraiser.ownerid', '=', 'donation.funderid')
+    .select('*').where('ownerid','=',id)
         
 }
 function findById(id){
