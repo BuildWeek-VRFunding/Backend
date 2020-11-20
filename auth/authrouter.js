@@ -5,10 +5,10 @@ const fund = require('../database/auth-model')
 //CREATE FUNDRAISER
 router.post('/fundraiseradd', (req, res) => {
     const { id } = req.params;
-    const recipe = req.body;
-    console.log(recipe);
+    const fundraiser = req.body;
+    console.log(fundraiser);
  
-    Recipes.add(recipe)
+    fund.add(fundraiser)
        .then(data => {
           res.status(201).json(data);
        })
@@ -21,7 +21,6 @@ router.post('/fundraiseradd', (req, res) => {
 router.post('/donationadd/:id', (req, res) => {
     const donation = req.body;
     console.log(donation);
- 
     fund.adddonation(donation)
        .then(data => {
           res.status(201).json(data);
