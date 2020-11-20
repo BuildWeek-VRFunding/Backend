@@ -7,7 +7,7 @@ router.post('/fundraiseradd', (req, res) => {
     const fundraiser = req.body;
     console.log(fundraiser);
  
-    fund.add(fundraiser)
+    fund.addfund(fundraiser)
        .then(data => {
           res.status(201).json(data);
        })
@@ -90,7 +90,7 @@ router.get('/user/:id', (req, res) => {
             res.status(404).json({message: 'could not find fundraiser', err})
         })
 })
-//GET DONATIONS BY ID
+//GET DONATIONS BY FUNDRAISER ID
 router.get('/donationtotal/:id', (req, res) => {
     const id = req.params.id;
     fund.getDonationTotalByID(id)
@@ -101,7 +101,7 @@ router.get('/donationtotal/:id', (req, res) => {
             res.status(404).json({message: 'could not find fundraiser', err})
         })
 })
-//ALL DONATIONS FOR A CERTAIN FUNDRAISER
+//ALL DONATIONS FROM A CERTAIN DONOR
 router.get('/donatedtotal/:id', (req, res) => {
     const id = req.params.id;
     fund.findDonationByID(id)

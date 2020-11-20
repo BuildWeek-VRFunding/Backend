@@ -32,9 +32,7 @@ function update(id, changes) {
  }
  
  function remove(id) {
-    return db('fundraiser')
-       .where( id )
-       .del()
+    return db('fundraiser').where( id ).del()
  }
 function getfundraiser(id){
     return db("fundraiser as f").join("donations as d", "d.funderid", "f.ownerid")
