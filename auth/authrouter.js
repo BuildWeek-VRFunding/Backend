@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const Users = require("../database/users-model")
 const fund = require('../database/auth-model')
 //CREATE FUNDRAISER
@@ -56,6 +55,8 @@ router.delete('/fundraiserdel/:id', (req,res) => {
     })
 
 })
+//WORKING ON THIS ENDPOINT//
+//RETURNS A FUNDRAISER AND THE DONORS ASSOCIATED WITH IT.
 router.get('/fundraiserall/:id', (req, res) => {
     const id = req.params.id;
     fund.getfundraiser(id)
@@ -100,6 +101,7 @@ router.get('/donationtotal/:id', (req, res) => {
             res.status(404).json({message: 'could not find fundraiser', err})
         })
 })
+//ALL DONATIONS FOR A CERTAIN FUNDRAISER
 router.get('/donatedtotal/:id', (req, res) => {
     const id = req.params.id;
     fund.findDonationByID(id)

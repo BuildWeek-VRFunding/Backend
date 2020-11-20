@@ -12,28 +12,28 @@ module.exports = {
 }
 function addfund(data) {
     return db('fundraiser')
-       .insert(data, 'id')
-       .then(ids => {
-          return getfundraiser(ids[0]);
+       .insert(data)
+       .then(fundraiser => {
+          return fundraiser;
        })
     }
        function adddonation(data) {
         return db('donation')
            .insert(data)
-           .then(ids => {
-              return findDonationByID(ids[0]);
+           .then(donation => {
+              return findDonationByID(donation);
            })
         }
 function update(id, changes) {
-    return db('fundraiser').where({ id }).update(changes)
+    return db('fundraiser').where(id).update(changes)
        .then(data => {
-          return findById(id)
+          return data
        })
  }
  
  function remove(id) {
     return db('fundraiser')
-       .where({ id })
+       .where( id )
        .del()
  }
 function getfundraiser(id){
